@@ -4,7 +4,7 @@ LINK = g++ -O3
 PY = python
 MK = make
 
-PY_TARGET = python3.4
+PY_TARGET = python3.5m
 
 PY_INC = -I /usr/include/$(PY_TARGET)
 PY_LIB = /usr/lib/$(PY_TARGET).so
