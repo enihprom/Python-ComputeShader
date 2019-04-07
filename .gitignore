@@ -2,6 +2,8 @@
 *.pyd
 *.pyc
 *.o
+*~
+.*~
 
 __pycache__
 
