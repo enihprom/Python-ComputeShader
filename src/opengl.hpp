@@ -1,5 +1,6 @@
 //#pragma once
 
+/*
 #ifdef _WIN64
 	typedef long long int GLsizeiptr;
 	typedef long long int GLintptr;
@@ -7,6 +8,7 @@
 	typedef int GLsizeiptr;
 	typedef int GLintptr;
 #endif
+*/
 
 typedef char GLbyte;
 typedef char GLchar;
