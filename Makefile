@@ -4,45 +4,32 @@ LINK = g++ -O3
 PY = python
 MK = make
 
-BITS = 32
-PY_TARGET = Python35
+PY_TARGET = python3.4
 
-PY_HOME = D:\PythonBuild\$(PY_TARGET)-$(BITS)
+PY_INC = -I /usr/include/$(PY_TARGET)
+PY_LIB = /usr/lib/$(PY_TARGET).so
 
-# by default the python3.5 installation folder is
-# C:\Python35
-# PY_HOME = C:\$(PY_TARGET)
+DEPS = -lopengl32 $(PY_LIB)
 
-# or
-
-# C:\Python35-64
-# PY_HOME = C:\$(PY_TARGET)-$(BITS)
-
-
-PY_INC = -I $(PY_HOME)\include
-PY_DLL = $(PY_HOME)\$(PY_TARGET).dll
-
-DEPS = -lgdi32 -lopengl32 $(PY_DLL)
-
-all: clean Bin\ComputeShader.pyd release-beta
+all: clean bin/computeshader.pyd release-beta
 
 prepare:
-	$(PY) Prepare.py
+	$(PY) prepare.py
 
 clean:
-	$(PY) Clear.py
+	$(PY) clear.py
 
 release-beta:
-	$(PY) Release.py beta $(PY_TARGET) $(BITS)
+	$(PY) release.py beta $(PY_TARGET) 
 
-Bin\ComputeShader.pyd: prepare Temp\Module.o Temp\OpenGL.o Source\Module.def
-	$(LINK) -shared Temp\Module.o Temp\OpenGL.o $(DEPS) -o Bin\ComputeShader.pyd
+bin/computeshader.pyd: prepare tmp/module.o tmp/opengl.o src/module.def
+	$(LINK) -shared tmp/module.o tmp/opengl.o $(DEPS) -o bin/computeshader.pyd
 
-Temp\Module.o: prepare Source\Module.cpp Source\OpenGL.hpp
-	$(COMP) $(PY_INC) Source\Module.cpp -o Temp\Module.o
+tmp/module.o: prepare src/module.cpp src/opengl.hpp
+	$(COMP) $(PY_INC) src/module.cpp -o tmp/module.o
 	
-Temp\OpenGL.o: prepare Source\OpenGL.cpp Source\OpenGL.hpp
-	$(COMP) $(PY_INC) Source\OpenGL.cpp -o Temp\OpenGL.o
+tmp/opengl.o: prepare src/opengl.cpp src/opengl.hpp
+	$(COMP) $(PY_INC) src/opengl.cpp -o tmp/opengl.o
 
 Run:
-	$(PY) Test.py
+	$(PY) test.py
