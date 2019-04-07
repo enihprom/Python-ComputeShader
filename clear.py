@@ -1,7 +1,7 @@
 import shutil, os
 
-if os.path.isdir('Bin'):
-	shutil.rmtree('Bin')
+if os.path.isdir('bin'):
+	shutil.rmtree('bin')
 	
-if os.path.isdir('Temp'):
-	shutil.rmtree('Temp')
+if os.path.isdir('tmp'):
+	shutil.rmtree('tmp')

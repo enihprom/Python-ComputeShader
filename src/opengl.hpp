@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 
 #ifdef _WIN64
 	typedef long long int GLsizeiptr;

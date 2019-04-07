@@ -1,4 +1,4 @@
-COMP = g++ -std=c++11 -c
+COMP = g++ -std=c++11 -fpermissive -c
 LINK = g++ -O3
 
 PY = python

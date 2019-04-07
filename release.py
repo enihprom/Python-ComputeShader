@@ -6,17 +6,17 @@ if len(sys.argv) < 2:
 else:
 	ver = '-'.join(sys.argv[1:])
 
-if not os.path.isdir('Release'):
-	os.mkdir('Release')
+if not os.path.isdir('release'):
+	os.mkdir('release')
 
-package = zipfile.ZipFile('Release/Release-%s.zip' % ver, 'w')
+package = zipfile.zipfile('release/release-%s.zip' % ver, 'w')
 
 package.write('LICENSE')
 package.write('README.md')
 
-for example in ['Test.py', 'Primes.py']:
+for example in ['test.py', 'primes.py']:
 	data = open(example, 'rb').read()
-	data = data.replace(b'from Bin import ComputeShader', b'from Modules import ComputeShader')
+	data = data.replace(b'from bin import ComputeShader', b'from modules import computeshader')
 	package.writestr(example, data)
 
-package.write('Bin/ComputeShader.pyd', 'Modules/ComputeShader.pyd')
+package.write('bin/computeshader.pyd', 'modules/computeshader.pyd')
